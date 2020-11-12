@@ -14,6 +14,16 @@ public class MyFirstHomework {
         System.out.println("Final sum = " + finalSum);
     }
 
+    private double countPercentSum(int a, double b) {
+        double c = a * b;
+        return c;
+    }
+
+    private double countFinalSum(int d, double e) {
+        double f = d + e;
+        return f;
+    }
+
     @Test
     public void secondTask() {
 
@@ -27,13 +37,4 @@ public class MyFirstHomework {
         System.out.println("Word count: " + wordCount);
     }
 
-    private double countPercentSum(int a, double b) {
-        double c = a * b;
-        return c;
-    }
-
-    private double countFinalSum(int d, double e) {
-        double f = d + e;
-        return f;
-    }
 }
