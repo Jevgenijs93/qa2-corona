@@ -4,20 +4,36 @@ public class MyFirstHomework {
 
     @Test
     public void firstTask() {
-        System.out.println("Hello, corona!");
         int startSum = 85000;
-        double percentSum = 0.24 ;
-        //float percentSum = (countPercentSum(85000, 24));
+        double percentSumInPropostion = 0.24;
 
-    /*    String e = "Hello, world!";
-        String b = e.replace(" ", "");
-        int  a = b.length();
-        System.out.println(a);
-        String[] c = e.split(" ");
-        System.out.println(c.length); */
+        System.out.println("Start sum = " + startSum);
+        double percentSum = (countPercentSum(startSum , percentSumInPropostion));
+        System.out.println("Percent sum = " + percentSum);
+        double finalSum = (countFinalSum(startSum , percentSum));
+        System.out.println("Final sum = " + finalSum);
     }
 
-    private float countPercentSum(int a, float b) {
-        float c = a * b;
+    @Test
+    public void secondTask() {
+
+        String sentence = "Hello, world!";
+        System.out.println("Sentence: " + sentence);
+        String replaceSpaces = sentence.replace(" ", "");
+        int  symbolCount = replaceSpaces.length();
+        System.out.println("Symbol count: " + symbolCount);
+        String[] splitWords = sentence.split(" ");
+        int wordCount = (splitWords.length);
+        System.out.println("Word count: " + wordCount);
+    }
+
+    private double countPercentSum(int a, double b) {
+        double c = a * b;
         return c;
+    }
+
+    private double countFinalSum(int d, double e) {
+        double f = d + e;
+        return f;
+    }
 }
