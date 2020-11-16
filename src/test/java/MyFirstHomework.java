@@ -40,14 +40,14 @@ public class MyFirstHomework {
     }
 
     @Test
-        public void ThirdTask() {
+    public void ThirdTask() {
         System.out.println("Third task:");
         int x1 = 1;
         int x2 = 2;
         int y1 = 3;
         int y2 = 4;
-        System.out.println("First point coordinates " + "(" +x1+","+y1+")");
-        System.out.println("Second point coordinates " + "(" +x2+","+y2+")");
+        System.out.println("First point coordinates " + "(" + x1 + "," + y1 + ")");
+        System.out.println("Second point coordinates " + "(" + x2 + "," + y2 + ")");
 
         double distanceBetweenTwoCoordinates = (countDistanceBetweenCoordinates(x1, x2, y1, y2));
         double roundDistanceBetweenTwoCoordinates = Math.round(distanceBetweenTwoCoordinates * 100.0) / 100.0;
@@ -56,7 +56,7 @@ public class MyFirstHomework {
     }
 
     private double countDistanceBetweenCoordinates(int x1, int x2, int y1, int y2) {
-      double  distance = Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+        double distance = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
         return distance;
     }
 
