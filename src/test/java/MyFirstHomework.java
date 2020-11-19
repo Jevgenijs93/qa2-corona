@@ -7,10 +7,12 @@ public class MyFirstHomework {
     public void firstTask() {
         System.out.println("First task:");
         int startSum = 85000;
-        double percentSumInProportion = 0.256;
+        double percents = 25.6;
+        double percentSumInProportion = percents / 100.0;
 
         System.out.println("Start sum = " + startSum);
         double percentSum = (countPercentSum(startSum, percentSumInProportion));
+        System.out.println("Percents = " + percents + "%");
         System.out.println("Percent sum = " + percentSum);
         double finalSum = (countFinalSum(startSum, percentSum));
         System.out.println("Final sum = " + finalSum);
