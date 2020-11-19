@@ -42,7 +42,7 @@ public class MyFirstHomework {
     }
 
     @Test
-    public void ThirdTask() {
+    public void thirdTask() {
         System.out.println("Third task:");
         int x1 = 1;
         int x2 = 2;
