@@ -28,7 +28,7 @@ public class DelfiTests {
 
     @Test
     public void tvnetTest() {
-        String articleToOpen = "Pūce strādās divās Saeimas komisijās";
+        String articleToOpen = "Seskam Moncas rallijs beidzas drošības barjerās";
 
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
         WebDriver driver = new ChromeDriver();
