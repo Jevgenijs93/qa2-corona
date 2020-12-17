@@ -17,7 +17,7 @@ public class MySecondHomework {
 
     @Test
     public void tvnetTest() throws InterruptedException {
-        String articleToOpen = "Kāpēc skolēnu pārtikas pakās iekļauts Polijā, nevis Latvijā ražots piens?";
+        String articleToOpen = "Tirdzniecības ierobežojumu laikā būs aizliegta arī būvmateriālu mazumtirdzniecība";
 
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
         WebDriver driver = new ChromeDriver();
@@ -34,8 +34,6 @@ public class MySecondHomework {
         String firstArticleText = articleTitle.getText();
         System.out.println(firstArticleText);
         articleTitle.click();
-
-        Thread.sleep(10000);
 
         WebElement secondArticleTitle = driver.findElement(HEADLINE_ARTICLE_TITLE);
         String secondArticleText = secondArticleTitle.getText();
@@ -94,6 +92,9 @@ public class MySecondHomework {
             }
 
         }
+
+        WebDriverWait waitHeadlineArticleTitle1 = new WebDriverWait(driver, 10);
+        waitHeadlineArticleTitle1.until(ExpectedConditions.visibilityOfElementLocated(HEADLINE_ARTICLE_TITLE));
 
         WebElement fifthArticleTitle = driver.findElement(HEADLINE_ARTICLE_TITLE);
         String fifthArticleText = fifthArticleTitle.getText();
