@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,11 +14,13 @@ public class MySecondHomework {
     private final By ARTICLE_TITLE = By.xpath(".//span[@itemprop = 'headline name']");
     private final By COMMENT_BTN = By.xpath(".//img[@src = '/v5/img/icons/comment-v2.svg']");
     private final By HEADLINE_ARTICLE_TITLE = By.xpath(".//h1[@class = 'article-headline']");
-    //   private final By COMMENT_COUNT = By.xpath(".//span[@class = 'article-share__item--count']");
+    private final By COMMENT_COUNT_ON_LANDING_PAGE = By.xpath(".//span[contains(@class, 'article__comment')]");
+    private final By COMMENT_COUNT_ON_ARTICLE_PAGE = By.xpath(".//span[@class = 'article-share__item--count']");
+    private final By COMMENT_COUNT_ON_COMMENT_PAGE = By.xpath(".//span[contains (@class,  'article-comments-heading__count')]");
 
     @Test
     public void tvnetTest() throws InterruptedException {
-        String articleToOpen = "Tirdzniecības ierobežojumu laikā būs aizliegta arī būvmateriālu mazumtirdzniecība";
+        String articleToOpen = "Pirms vakcinācijas katram jāatbild uz 13 jautājumiem ";
 
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
         WebDriver driver = new ChromeDriver();
@@ -28,43 +31,28 @@ public class MySecondHomework {
         WebElement acceptBtn = driver.findElement(ACCEPT_COOKIE_BTN);
         acceptBtn.click();
 
-        // 1. click on random article and go to comments page
-
-        WebElement articleTitle = driver.findElement(ARTICLE_TITLE);
-        String firstArticleText = articleTitle.getText();
-        System.out.println(firstArticleText);
-        articleTitle.click();
-
-        WebElement secondArticleTitle = driver.findElement(HEADLINE_ARTICLE_TITLE);
-        String secondArticleText = secondArticleTitle.getText();
-        System.out.println(secondArticleText);
-
-     /*   List<WebElement> commentCounts = driver.findElements(COMMENT_COUNT);
-        WebElement commentCount = commentCounts.get(1);
-        String commentCountText = commentCount.getText();
-        System.out.println(commentCountText);
-
-        String secondArticleTextWithCommentCount = secondArticleText + " (" + commentCountText + ")"; */
-
-        boolean firstIsEqual = firstArticleText.contains(secondArticleText);
-        System.out.println(firstIsEqual);
-
-        WebDriverWait waitCommentButton = new WebDriverWait(driver, 10);
-        waitCommentButton.until(ExpectedConditions.visibilityOfElementLocated(COMMENT_BTN));
-
-        WebElement commentButton = driver.findElement(COMMENT_BTN);
-        commentButton.click();
-
-        Thread.sleep(1000);
-
-        // 2. Click on specific article by count
+        // 1. Click on specific article by count
 
         driver.get("http://tvnet.lv");
+
+        Thread.sleep(1000);
 
         List<WebElement> articles = driver.findElements(ARTICLE_TITLE);
         WebElement thirdArticle = articles.get(2);
         String thirdArticleText = thirdArticle.getText();
         System.out.println(thirdArticleText);
+
+        // Find comment count on landing page
+
+        int commentsCount = 0;
+
+        if (!thirdArticle.findElements(COMMENT_COUNT_ON_LANDING_PAGE).isEmpty()) {
+            WebElement element = thirdArticle.findElement(COMMENT_COUNT_ON_LANDING_PAGE);
+            String stringToParse = element.getText();
+            stringToParse = stringToParse.substring(1, stringToParse.length() - 1);
+            commentsCount = Integer.parseInt(stringToParse);
+        }
+
         articles.get(2).click();
 
         WebDriverWait waitHeadlineArticleTitle = new WebDriverWait(driver, 10);
@@ -77,9 +65,36 @@ public class MySecondHomework {
         boolean secondIsEqual = thirdArticleText.contains(fourthArticleText);
         System.out.println(secondIsEqual);
 
+        WebDriverWait waitCommentButton = new WebDriverWait(driver, 10);
+        waitCommentButton.until(ExpectedConditions.visibilityOfElementLocated(COMMENT_BTN));
+
+        Thread.sleep(10000);
+
+        WebElement commentButton = driver.findElement(COMMENT_BTN);
+
+        // Find comment count on article page
+
+        List<WebElement> commentCounts = driver.findElements(COMMENT_COUNT_ON_ARTICLE_PAGE);
+        WebElement commentCount = commentCounts.get(1);
+        String commentCountText = commentCount.getText();
+        int commentsCountTextParse = Integer.parseInt(commentCountText);
+        Assertions.assertEquals(commentsCount, commentsCountTextParse, "Wrong comment count");
+
+        commentButton.click();
+
+        // Find comment count on comment page
+
+        WebDriverWait waitCommentCountOnCommentPage = new WebDriverWait(driver, 10);
+        waitCommentCountOnCommentPage.until(ExpectedConditions.visibilityOfElementLocated(COMMENT_COUNT_ON_COMMENT_PAGE));
+
+        WebElement commentCountOnCommentPage = driver.findElement(COMMENT_COUNT_ON_COMMENT_PAGE);
+        String commentCountOnCommentPageText = commentCountOnCommentPage.getText();
+        int commentCountOnCommentPageTextParse = Integer.parseInt(commentCountOnCommentPageText);
+        Assertions.assertEquals(commentsCount, commentCountOnCommentPageTextParse, "Wrong comment count");
+
         Thread.sleep(1000);
 
-        // 3. Click on specific article by article name
+        // 2. Click on specific article by article name
 
         driver.get("http://tvnet.lv");
 
