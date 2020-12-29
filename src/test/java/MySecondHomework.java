@@ -17,10 +17,11 @@ public class MySecondHomework {
     private final By COMMENT_COUNT_ON_LANDING_PAGE = By.xpath(".//span[contains(@class, 'article__comment')]");
     private final By COMMENT_COUNT_ON_ARTICLE_PAGE = By.xpath(".//span[@class = 'article-share__item--count']");
     private final By COMMENT_COUNT_ON_COMMENT_PAGE = By.xpath(".//span[contains (@class,  'article-comments-heading__count')]");
+    private final By ARTICLE_COMMENTS_COUNT = By.xpath(".//li[@class = 'article-comment']");
 
     @Test
     public void tvnetTest() throws InterruptedException {
-        String articleToOpen = "Pirms vakcinācijas katram jāatbild uz 13 jautājumiem ";
+        String articleToOpen = "Krievija nosaka sankcijas Vācijas amatpersonām ";
 
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
         WebDriver driver = new ChromeDriver();
@@ -80,6 +81,10 @@ public class MySecondHomework {
         int commentsCountTextParse = Integer.parseInt(commentCountText);
         Assertions.assertEquals(commentsCount, commentsCountTextParse, "Wrong comment count");
 
+        List<WebElement> articleCommentCount = driver.findElements(ARTICLE_COMMENTS_COUNT);
+        int articleCommentCountSize = articleCommentCount.size();
+        System.out.println(articleCommentCountSize);
+
         commentButton.click();
 
         // Find comment count on comment page
@@ -91,6 +96,8 @@ public class MySecondHomework {
         String commentCountOnCommentPageText = commentCountOnCommentPage.getText();
         int commentCountOnCommentPageTextParse = Integer.parseInt(commentCountOnCommentPageText);
         Assertions.assertEquals(commentsCount, commentCountOnCommentPageTextParse, "Wrong comment count");
+
+
 
         Thread.sleep(1000);
 
