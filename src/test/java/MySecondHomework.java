@@ -69,8 +69,6 @@ public class MySecondHomework {
         WebDriverWait waitCommentButton = new WebDriverWait(driver, 10);
         waitCommentButton.until(ExpectedConditions.visibilityOfElementLocated(COMMENT_BTN));
 
-        //  Thread.sleep(10000);
-
         WebElement commentButton = driver.findElement(COMMENT_BTN);
 
         // Find comment count on article page
