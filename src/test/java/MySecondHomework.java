@@ -21,7 +21,7 @@ public class MySecondHomework {
 
     @Test
     public void tvnetTest() throws InterruptedException {
-        String articleToOpen = "Krievija nosaka sankcijas Vācijas amatpersonām ";
+        String articleToOpen = "Slimnīcās rodas grūtības ar intensīvās terapijas un reanimācijas gultu nodrošināšanu";
 
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
         WebDriver driver = new ChromeDriver();
@@ -69,7 +69,7 @@ public class MySecondHomework {
         WebDriverWait waitCommentButton = new WebDriverWait(driver, 10);
         waitCommentButton.until(ExpectedConditions.visibilityOfElementLocated(COMMENT_BTN));
 
-        Thread.sleep(10000);
+        //  Thread.sleep(10000);
 
         WebElement commentButton = driver.findElement(COMMENT_BTN);
 
@@ -80,10 +80,6 @@ public class MySecondHomework {
         String commentCountText = commentCount.getText();
         int commentsCountTextParse = Integer.parseInt(commentCountText);
         Assertions.assertEquals(commentsCount, commentsCountTextParse, "Wrong comment count");
-
-        List<WebElement> articleCommentCount = driver.findElements(ARTICLE_COMMENTS_COUNT);
-        int articleCommentCountSize = articleCommentCount.size();
-        System.out.println(articleCommentCountSize);
 
         commentButton.click();
 
@@ -97,7 +93,11 @@ public class MySecondHomework {
         int commentCountOnCommentPageTextParse = Integer.parseInt(commentCountOnCommentPageText);
         Assertions.assertEquals(commentsCount, commentCountOnCommentPageTextParse, "Wrong comment count");
 
+        // Count comments by myself
 
+        List<WebElement> articleCommentCount = driver.findElements(ARTICLE_COMMENTS_COUNT);
+        int articleCommentCountSize = articleCommentCount.size();
+        Assertions.assertEquals(commentsCount, articleCommentCountSize, "Wrong comment count");
 
         Thread.sleep(1000);
 
