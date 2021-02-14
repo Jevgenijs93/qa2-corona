@@ -20,4 +20,9 @@ public class HomePage {
         WebElement titleToClick = baseFunc.findElements(TITLE).get(id);
         baseFunc.click(titleToClick);
     }
+
+    public void getArticleText (String text) {
+        WebElement titleToGetText = baseFunc.findElements(TITLE).get(text);
+
+    }
 }
