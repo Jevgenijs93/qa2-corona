@@ -22,7 +22,9 @@ public class HomePage {
     }
 
     public void getArticleText (String text) {
-        WebElement titleToGetText = baseFunc.findElements(TITLE).get(text);
-
+        WebElement getArticleText = baseFunc.getText(TITLE);
     }
+
+
+
 }
