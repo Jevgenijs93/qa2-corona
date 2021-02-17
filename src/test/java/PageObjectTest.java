@@ -18,6 +18,6 @@ public class PageObjectTest {
         homePage.acceptCookies();
         homePage.getTextOfArticleById(3);
         homePage.openArticleById(3);
-        articlePage.secondArticleTitleText();
+        articlePage.ArticleTitleText();
     }
 }
