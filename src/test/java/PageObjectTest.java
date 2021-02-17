@@ -15,6 +15,6 @@ public class PageObjectTest {
         HomePage homePage = new HomePage(baseFunc);
         homePage.acceptCookies();
         homePage.openArticleById(3);
-
+        homePage.secondArticleTitleText();
     }
 }
