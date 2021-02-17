@@ -49,10 +49,10 @@ public class BaseFunc {
         return driver.findElements(locator);
     }
 
-    public void getText(By we) {
+   public void getText(By we) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(we));
         String wetext = driver.findElement(we).getText();
-        LOGGER.info("Text of title to click: " + wetext);
+        LOGGER.info("Text of titel to click: " + wetext);
     }
 
 }
