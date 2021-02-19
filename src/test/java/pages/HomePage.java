@@ -21,7 +21,7 @@ public class HomePage {
 
     public void getTextOfArticleById(int id) {
         WebElement titleToGet = baseFunc.findElements(TITLE).get(id);
-        String titleToGetText = titleToGet .getText();
+        String titleToGetText = titleToGet.getText();
         LOGGER.info("Text of title to click: " + titleToGetText);
     }
 
