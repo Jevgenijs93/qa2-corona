@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 public class HomePage {
     private final By ACCEPT_BTN = By.xpath(".//button[@mode = 'primary']");
     private final By TITLE = By.xpath(".//span[@itemprop = 'headline name']");
+    private final By COMMENT_COUNT = By.xpath(".//span[contains(@class, 'article__comment')]");
     private BaseFunc baseFunc;
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
 
@@ -19,10 +20,11 @@ public class HomePage {
         baseFunc.click(ACCEPT_BTN);
     }
 
-    public void getTextOfArticleById(int id) {
+    public String getTextOfArticleById(int id) {
         WebElement titleToGet = baseFunc.findElements(TITLE).get(id);
         String titleToGetText = titleToGet.getText();
         LOGGER.info("Text of title to click: " + titleToGetText);
+        return titleToGetText;
     }
 
     public void openArticleById(int id) {
@@ -30,6 +32,16 @@ public class HomePage {
         baseFunc.click(titleToClick);
     }
 
+    public String getCommentCountText(int id) {
+        WebElement titleToGet = baseFunc.findElements(TITLE).get(id);
+        WebElement element = titleToGet.findElement(COMMENT_COUNT);
 
+        String commentCountText = element.getText();
+        commentCountText = commentCountText.substring(1, commentCountText.length() - 1);
+
+        return commentCountText;
+
+
+    }
 
 }
