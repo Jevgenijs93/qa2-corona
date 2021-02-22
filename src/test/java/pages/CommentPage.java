@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class CommentPage {
 
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
@@ -32,7 +34,12 @@ public class CommentPage {
     }
 
     public String countComments() {
-        WebElement getCommentElement = baseFunc.findElements(ARTICLE_COMMENTS_COUNT);
+        List<WebElement> getCommentElement = baseFunc.findElements(ARTICLE_COMMENTS_COUNT);
+        int articleCommentCountSize = getCommentElement.size();
+        String articleCommentCount = String.valueOf(articleCommentCountSize);
+        LOGGER.info("Comment count on comment page (counted manually): " + articleCommentCount);
+
+        return articleCommentCount;
     }
 
 

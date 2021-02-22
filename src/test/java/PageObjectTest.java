@@ -21,10 +21,10 @@ public class PageObjectTest {
 
         homePage.acceptCookies();
 
-        String articlePageText = homePage.getTextOfArticleById(1);
-        String stringToCompare = articlePageText.substring(0, articlePageText.length() - 5);
-        String commentCountOnMainPage = homePage.getCommentCountText(1);
-        homePage.openArticleById(1);
+        String articlePageText = homePage.getTextOfArticleById(2);
+        String stringToCompare = articlePageText.substring(0, articlePageText.length() - 4);
+        String commentCountOnMainPage = homePage.getCommentCountText(2);
+        homePage.openArticleById(2);
 
         String articleTitleText = articlePage.articleTitleText();
         Assertions.assertEquals(articleTitleText, stringToCompare, "Wrong title opened");
@@ -36,5 +36,15 @@ public class PageObjectTest {
         Assertions.assertEquals(articleTitleOnCommentPageText, stringToCompare, "Comments of wrong title opened");
         String commentCountOnCommentPage = commentPage.getCommentCount();
         Assertions.assertEquals(commentCountOnCommentPage, commentCountOnMainPage, "Wrong comment count on comment page");
+        String getCountCommentsText = commentPage.countComments();
+        Assertions.assertEquals(getCountCommentsText, commentCountOnMainPage, "Not correctly comments counted");
+
+        baseFunc.openURL("http://tvnet.lv");
+
+        String getTextOfArticle = homePage.openArticleByText();
+        String articleTitleOfOpenedPage = articlePage.articleTitleText();
+        Assertions.assertEquals(getTextOfArticle, articleTitleOfOpenedPage, "Wrong title opened by text");
+
+
     }
 }
