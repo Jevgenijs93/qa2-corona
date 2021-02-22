@@ -8,7 +8,6 @@ import pages.CommentPage;
 import pages.HomePage;
 
 public class PageObjectTest {
-    private final Logger LOGGER = LogManager.getLogger(this.getClass());
 
     @Test
     public void tvnetPageObjectTest() {
