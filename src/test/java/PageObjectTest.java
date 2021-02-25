@@ -8,24 +8,44 @@ import pages.CommentPage;
 import pages.HomePage;
 
 public class PageObjectTest {
+    private final Logger LOGGER = LogManager.getLogger(this.getClass());
+    private final int ARTICLE_ID = 2;
 
     @Test
     public void tvnetPageObjectTest() {
+        LOGGER.info("This test is checking titles and comment count");
+
         BaseFunc baseFunc = new BaseFunc();
         baseFunc.openURL("http://tvnet.lv");
 
+
         HomePage homePage = new HomePage(baseFunc);
-        ArticlePage articlePage = new ArticlePage(baseFunc);
-        CommentPage commentPage = new CommentPage(baseFunc);
+
+       // CommentPage commentPage = new CommentPage(baseFunc);
 
         homePage.acceptCookies();
 
-        String articlePageText = homePage.getTextOfArticleById(2);
-        String stringToCompare = articlePageText.substring(0, articlePageText.length() - 4);
-        String commentCountOnMainPage = homePage.getCommentCountText(2);
-        homePage.openArticleById(2);
+        // Get 3rd article title on Home Page
+        String homePageTitle = homePage.getArticleTitleById(ARTICLE_ID);
 
-        String articleTitleText = articlePage.articleTitleText();
+      //  String articlePageText = homePage.getTextOfArticleById(2);
+      //  String stringToCompare = articlePageText.substring(0, articlePageText.length() - 4);
+      //  String commentCountOnMainPage = homePage.getCommentCountText(2);
+        homePage.openArticleById(ARTICLE_ID);
+
+        // Get article title on Article Page
+        ArticlePage articlePage = homePage.openArticleById(ARTICLE_ID);
+      //  ArticlePage articlePage = new ArticlePage(baseFunc);
+        String articlePageTitle = articlePage.getTitle();
+
+
+
+
+
+        // Compare article titles
+      //  Assertions.assertEquals(homePageTitle, articlePageTitle, "Titles are not the same");
+        Assertions.assertTrue(homePageTitle.startsWith(articlePageTitle), "Titles are not the same");
+      /*  String articleTitleText = articlePage.articleTitleText();
         Assertions.assertEquals(articleTitleText, stringToCompare, "Wrong title opened");
         String commentCountOnArticlePage = articlePage.getCommentCountById(1);
         Assertions.assertEquals(commentCountOnArticlePage, commentCountOnMainPage, "Wrong comment count on article page");
@@ -42,7 +62,7 @@ public class PageObjectTest {
 
         String getTextOfArticle = homePage.openArticleByText();
         String articleTitleOfOpenedPage = articlePage.articleTitleText();
-        Assertions.assertEquals(getTextOfArticle, articleTitleOfOpenedPage, "Wrong title opened by text");
+        Assertions.assertEquals(getTextOfArticle, articleTitleOfOpenedPage, "Wrong title opened by text"); */
 
 
     }

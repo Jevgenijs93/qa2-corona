@@ -1,5 +1,6 @@
 package pages;
 
+import helper.CommentsHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -11,30 +12,45 @@ public class HomePage {
     private final By ACCEPT_BTN = By.xpath(".//button[@mode = 'primary']");
     private final By TITLE = By.xpath(".//span[@itemprop = 'headline name']");
     private final By COMMENT_COUNT = By.xpath(".//span[contains(@class, 'article__comment')]");
-    private BaseFunc baseFunc;
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
+    private BaseFunc baseFunc;
 
     public HomePage(BaseFunc baseFunc) {
         this.baseFunc = baseFunc;
     }
 
     public void acceptCookies() {
+        LOGGER.info("Accepting cookies");
         baseFunc.click(ACCEPT_BTN);
     }
 
-    public String getTextOfArticleById(int id) {
+ /*   public String getTextOfArticleById(int id) {
         WebElement titleToGet = baseFunc.findElements(TITLE).get(id);
         String titleToGetText = titleToGet.getText();
         LOGGER.info("Text of title to click: " + titleToGetText);
         return titleToGetText;
+    } */
+
+    public String getArticleTitleById (int id) {
+        LOGGER.info("Getting article Nr. " + (id + 1) + " title");
+        return  baseFunc.getText(TITLE, id);
     }
 
-    public void openArticleById(int id) {
+    public ArticlePage openArticleById(int id) {
+        LOGGER.info("Open article Nr. " + (id + 1));
         WebElement titleToClick = baseFunc.findElements(TITLE).get(id);
         baseFunc.click(titleToClick);
+        return new ArticlePage(baseFunc);
     }
 
-    public String openArticleByText() {
+    public int getCommentsCountById(int id) {
+        WebElement commentsCount = baseFunc.findElements(COMMENT_COUNT).get(id);
+
+        CommentsHelper helper = new CommentsHelper();
+        return helper.getCommentCount(commentsCount);
+    }
+
+  /*  public String openArticleByText() {
         String articleToOpen = "Aizvadītajā nedēļā ik dienu poti pret Covid-19 saņēma vidēji 1170 cilvēki";
         List<WebElement> articlesList = baseFunc.findElements(TITLE);
 
@@ -56,9 +72,9 @@ public class HomePage {
         String commentCountText = element.getText();
         commentCountText = commentCountText.substring(1, commentCountText.length() - 1);
 
-        return commentCountText;
+        return commentCountText; */
 
 
     }
 
-}
+
