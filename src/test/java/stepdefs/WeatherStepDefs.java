@@ -1,6 +1,7 @@
 package stepdefs;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -43,6 +44,11 @@ public class WeatherStepDefs {
     public void check_weather(Map<String, String> params) {
         Assertions.assertEquals(Integer.parseInt(params.get("id")), response.getWeathers().get(0).getId(), "Wrong Weather ID");
         Assertions.assertEquals(params.get("main"), response.getWeathers().get(0).getMain(), "Wrong Weather main");
+    }
+
+    @And("base is: {string}")
+    public void check_base(String base) {
+        Assertions.assertEquals(base, response.getBase(), "Wrong base");
     }
 
 
