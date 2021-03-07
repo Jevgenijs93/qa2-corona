@@ -10,16 +10,16 @@ public class WeatherResponse {
     private Coord coord;
     @JsonProperty("weather")
     private List<Weather> weathers;
-    private String base; // string ???
+    private String base;
     private Main main;
-    private Visibility visibility;
+    private int visibility;
     private Wind wind;
     private Clouds clouds;
-    private Dt dt;
+    private int dt;
     private Sys sys;
-    private Id id;
-    private Name name; // string ???
-    private Cod cod;
+    private int id;
+    private String name;
+    private int cod;
 
     public Coord getCoord() {
 
@@ -59,11 +59,11 @@ public class WeatherResponse {
         this.main = main;
     }
 
-    public Visibility getVisibility() {
+    public int getVisibility() {
         return visibility;
     }
 
-    public void setVisibility(Visibility visibility) {
+    public void setVisibility(int visibility) {
         this.visibility = visibility;
     }
 
@@ -83,11 +83,11 @@ public class WeatherResponse {
         this.clouds = clouds;
     }
 
-    public Dt getDt() {
+    public int getDt() {
         return dt;
     }
 
-    public void setDt(Dt dt) {
+    public void setDt(int dt) {
         this.dt = dt;
     }
 
@@ -99,27 +99,27 @@ public class WeatherResponse {
         this.sys = sys;
     }
 
-    public Id getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Id id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Name getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Name name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Cod getCod() {
+    public int getCod() {
         return cod;
     }
 
-    public void setCod(Cod cod) {
+    public void setCod(int cod) {
         this.cod = cod;
     }
 }
