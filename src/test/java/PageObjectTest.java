@@ -4,12 +4,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pages.ArticlePage;
 import pages.BaseFunc;
-import pages.CommentPage;
 import pages.HomePage;
+import pages.CommentPage;
 
 public class PageObjectTest {
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
     private final int ARTICLE_ID = 2;
+    private final int COMMENTS_COUNT_ID = 1;
 
     @Test
     public void tvnetPageObjectTest() {
@@ -21,49 +22,48 @@ public class PageObjectTest {
 
         HomePage homePage = new HomePage(baseFunc);
 
-       // CommentPage commentPage = new CommentPage(baseFunc);
-
         homePage.acceptCookies();
+        homePage.closeAds();
 
-        // Get 3rd article title on Home Page
+        // Get 2nd article title on Home Page
         String homePageTitle = homePage.getArticleTitleById(ARTICLE_ID);
 
-      //  String articlePageText = homePage.getTextOfArticleById(2);
-      //  String stringToCompare = articlePageText.substring(0, articlePageText.length() - 4);
-      //  String commentCountOnMainPage = homePage.getCommentCountText(2);
+        String stringToCompare = homePageTitle.substring(0, homePageTitle.length() - 5);
+        String commentCountOnMainPage = homePage.getCommentCountText(ARTICLE_ID);
         homePage.openArticleById(ARTICLE_ID);
+        homePage.closeAds();
 
         // Get article title on Article Page
-        ArticlePage articlePage = homePage.openArticleById(ARTICLE_ID);
-      //  ArticlePage articlePage = new ArticlePage(baseFunc);
+        ArticlePage articlePage = new ArticlePage(baseFunc);
         String articlePageTitle = articlePage.getTitle();
-
-
-
+        System.out.println(homePageTitle);
+        System.out.println(articlePageTitle);
 
 
         // Compare article titles
-      //  Assertions.assertEquals(homePageTitle, articlePageTitle, "Titles are not the same");
         Assertions.assertTrue(homePageTitle.startsWith(articlePageTitle), "Titles are not the same");
-      /*  String articleTitleText = articlePage.articleTitleText();
+        String articleTitleText = articlePage.articleTitleText();
         Assertions.assertEquals(articleTitleText, stringToCompare, "Wrong title opened");
-        String commentCountOnArticlePage = articlePage.getCommentCountById(1);
-        Assertions.assertEquals(commentCountOnArticlePage, commentCountOnMainPage, "Wrong comment count on article page");
+        String commentCountOnArticlePage = articlePage.getCommentCountById(COMMENTS_COUNT_ID);
+        Assertions.assertEquals(commentCountOnMainPage, commentCountOnArticlePage, "Wrong comment count on article page");
         articlePage.openCommentsById(0);
+
+        CommentPage commentPage = new CommentPage(baseFunc);
+
+        // Compare comments quantity
 
         String articleTitleOnCommentPageText = commentPage.articleTitleOnCommentPage();
         Assertions.assertEquals(articleTitleOnCommentPageText, stringToCompare, "Comments of wrong title opened");
         String commentCountOnCommentPage = commentPage.getCommentCount();
         Assertions.assertEquals(commentCountOnCommentPage, commentCountOnMainPage, "Wrong comment count on comment page");
         String getCountCommentsText = commentPage.countComments();
-        Assertions.assertEquals(getCountCommentsText, commentCountOnMainPage, "Not correctly comments counted");
+        Assertions.assertEquals(commentCountOnMainPage, getCountCommentsText, "Not correctly comments counted");
 
-        baseFunc.openURL("http://tvnet.lv");
+        // Check find title by text
 
+        homePage.goToHomePage();
         String getTextOfArticle = homePage.openArticleByText();
         String articleTitleOfOpenedPage = articlePage.articleTitleText();
-        Assertions.assertEquals(getTextOfArticle, articleTitleOfOpenedPage, "Wrong title opened by text"); */
-
-
+        Assertions.assertEquals(getTextOfArticle, articleTitleOfOpenedPage, "Wrong title opened by text");
     }
 }

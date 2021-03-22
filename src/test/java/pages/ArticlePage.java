@@ -9,9 +9,9 @@ public class ArticlePage {
 
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
     private final By TITLE = By.tagName("h1");
- //   private final By ARTICLE_TITLE = By.xpath(".//h1[@itemprop = 'headline name']");
- //   private final By COMMENT_BTN = By.xpath(".//img[@src = '/v5/img/icons/comment-v2.svg']");
- //   private final By COMMENT_COUNT = By.xpath(".//span[@class = 'article-share__item--count']");
+    private final By ARTICLE_TITLE = By.xpath(".//h1[@itemprop = 'headline name']");
+    private final By COMMENT_BTN = By.xpath(".//img[@src = '/v5/img/icons/comment-v2.svg']");
+    private final By COMMENT_COUNT = By.xpath(".//span[@class = 'article-share__item--count']");
     private BaseFunc baseFunc;
 
     public ArticlePage(BaseFunc baseFunc) {
@@ -24,7 +24,7 @@ public class ArticlePage {
         return baseFunc.getText(TITLE);
     }
 
- /*   public String articleTitleText() {
+    public String articleTitleText() {
         WebElement titleToGet = baseFunc.findElement(ARTICLE_TITLE);
         String titleToGetText = titleToGet.getText();
         LOGGER.info("Text of title: " + titleToGetText);
@@ -41,5 +41,5 @@ public class ArticlePage {
         String CommentCountToGetText = CommentCountToGet.getText();
         LOGGER.info("Comment count on article page: " + CommentCountToGetText);
         return CommentCountToGetText;
-    } */
+    }
 }

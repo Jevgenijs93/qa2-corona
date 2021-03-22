@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -58,12 +59,6 @@ public class BaseFunc {
         return driver.findElements(locator);
     }
 
- /*   public WebElement findElement(By locator) {
-        LOGGER.info("Trying to find element by locator:" + locator);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        return driver.findElement(locator);
-    } */
-
     public String getText(By locator) {
         LOGGER.info("Getting test for element by locator" + locator);
         // Get element -> Get text of this element
@@ -103,6 +98,16 @@ public class BaseFunc {
     public void closeBrowser() {
         LOGGER.info("Closing browser window");
         driver.close();
+    }
+
+    public boolean isElementPresents(By locator) {
+        try {
+
+            wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
 }
